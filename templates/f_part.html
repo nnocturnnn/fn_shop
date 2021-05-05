@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>27.10</title>
+<link rel="stylesheet" href={{ url_for('static', filename='css/home.css') }} />
+<link rel="stylesheet" href={{ url_for('static', filename='css/topStyle.css') }} />
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark">
+	<!-- <img id="logo" src="https://podmost.com/gallery_gen/4bd6194abb592f9d55231671ef67bc1e.gif" /> -->
+	<ul class="navbar-nav mr-auto">
+	<li class="nav-item active">
+	<a class="navbar-brand" href="/">27.10</a>
+	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+	</li>
+	<li class="nav-item active">
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Category
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			{% for row in categoryData %}
+			<a class="dropdown-item" href="/displayCategory?categoryId={{row[0]}}">{{row[1]}}</a>
+			{% endfor %}
+		</div>
+	</div>
+	</li>
+	<li class="nav-item active">
+	{% if not loggedIn %}
+		<a class="btn btn-outline-secondary" href="/loginForm">Sign In</a>
+	{% else %}
+	<div class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{{firstName}}
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="/account/orders">Your orders</a> <br>
+			<a class="dropdown-item" href="/account/profile">Your profile</a>
+			<hr>
+			<a class="dropdown-item" href="/logout">Sign Out</a>
+		</div>
+	</div>
+	{% endif %}
+	</li>
+	<li class="nav-item active">
+	{% if loggedIn %}
+	{% endif %}
+	</li>
+	</ul>
+	<form class="form-inline ms-auto">
+		<input type="text" class="form-control mr-sm-2" name="searchQuery">
+		<button type="submit" class="btn btn-outline-secondary my-2 my-sm-0">Search</button>
+	</form>
+	<div class="my-2 my-lg-0">
+		<a class="btn btn-outline-secondary" class="link" href="/cart">
+			<i class="fas fa-shopping-basket nav-icon">  card {{noOfItems}}</i>
+		</a>
+	</div>
+</nav>
